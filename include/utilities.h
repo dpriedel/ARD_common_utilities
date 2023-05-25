@@ -41,9 +41,9 @@
 
 
 // helper type for the visitor #4
-template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+template<class... Ts> struct Overloaded : Ts... { using Ts::operator()...; };
 // explicit deduction guide (not needed as of C++20)
-template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
+template<class... Ts> Overloaded(Ts...) -> Overloaded<Ts...>;
 
 namespace fs = std::filesystem;
 
@@ -55,7 +55,7 @@ namespace fs = std::filesystem;
 // use concepts to restrict to strings and string_views.
 
 template<typename T>
-inline std::vector<T> split_string(std::string_view string_data, char delim)
+inline std::vector<T> SplitString(std::string_view string_data, char delim)
     requires std::is_same_v<T, std::string> || std::is_same_v<T, std::string_view>
 {
     std::vector<T> results;
